@@ -1,6 +1,6 @@
 package fleetmanagmentsys1;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -19,8 +19,6 @@ public class FleetManagmentsys1 {
         this.IdUtilisateur = IdUtilisateur;
         this.password = password;
     }
-    
-    public static ArrayList<authentification> studentsList = new ArrayList<authentification>();
 
     public int getIdUtilisateur() {
         return IdUtilisateur;
@@ -42,7 +40,13 @@ public class FleetManagmentsys1 {
 
 
     public static void main(String[] args) {
-        auth(1, "azerty");
+        Scanner input1 = new Scanner(System.in);  
+        System.out.println("Enter ID");
+        int id = input1.nextInt(); 
+        Scanner input2 = new Scanner(System.in);  
+        System.out.println("Enter password");
+        String pass = input2.nextLine();
+        auth(id, pass);
         
     }
     public static void auth(int IdUtilisateur,String password){
