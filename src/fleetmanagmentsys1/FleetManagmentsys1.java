@@ -71,7 +71,7 @@ public class FleetManagmentsys1 {
             ResultSet rs=pst.executeQuery();
             if(rs.next()){ 
                 System.out.println("connected");
-                getrole(IdUtilisateur);
+                role(IdUtilisateur);
                 }
             else{
                 System.out.println("no account found");
@@ -83,7 +83,7 @@ public class FleetManagmentsys1 {
             System.err.println(e);
         }
     }
-    public static void getrole(int IdUtilisateur){
+    public static void role(int IdUtilisateur){
         Connection conn = null;
         try{
             conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
@@ -93,29 +93,22 @@ public class FleetManagmentsys1 {
             ResultSet rs = pst.executeQuery();
             if (rs.next ())
             {
-                String TypeCompte = rs.getString ("Type_Compte");
-                System.out.println (TypeCompte);
+                String TypeCompte = rs.getString ("Type_Compte");    
+                if (TypeCompte.equals("admin")){
+                    System.out.println("go to admin panel");
+                }
+                if (TypeCompte.equals("user")){
+                    System.out.println("go to user panel");
+                }
             }
             rs.close ();
             stmt.close ();
-                 }
+            }
         catch (SQLException e){
             System.err.println(e);
         }
+        
     }
-    public static void role(int IdUtilisateur,String TypeCompte){
-        Connection conn = null;
-        try{
-            conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
-            Statement stmt = (Statement) conn.createStatement();
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM user where IdUtilisateur = ? and TypeCOmpte = ?");
-            pst.setInt(1, IdUtilisateur);
-            pst.setString(2, TypeCompte);
-            ResultSet rs = pst.executeQuery();
-        }
-        catch (SQLException e){
-            System.err.println(e);
-        }
-}
+   
 }
     
