@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main{
    
     private static String USERNAME= "root";
-    private static String PASSWORD= "qwerty";
+    private static String PASSWORD= "";
     private static String CONN_STRING= "jdbc:mysql://localhost:3306/fms";
     
     public static void main(String[] args){
