@@ -8,6 +8,7 @@ package fleetmanagementsystemv1;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import fleetmanagementsystemv1.Main;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -18,9 +19,13 @@ public class auth extends javax.swing.JFrame {
     /**
      * Creates new form auth
      */
+    private static String USERNAME= "root";
+    private static String PASSWORD= "";
+    private static String CONN_STRING= "jdbc:mysql://localhost:3306/fms";
     public auth() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +114,11 @@ public class auth extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -140,9 +150,9 @@ public class auth extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
@@ -170,10 +180,29 @@ public class auth extends javax.swing.JFrame {
             int id = Integer.parseInt(text);
             char[] pass = jPasswordField1.getPassword();
             String password = new String(pass);
-            Main.auth(id, password);
             
-            this.setVisible(false);
-            General.admina.setVisible(true);
+            Connection conn = null;
+        try{
+            conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
+            Statement stmt = (Statement) conn.createStatement();
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM user where IdUtilisateur = ? and password = ?");
+            pst.setInt(1, id);
+            pst.setString(2, password);
+            ResultSet rs=pst.executeQuery();
+            if(rs.next()){ 
+                this.setVisible(false);
+                new adminpanel().setVisible(true);
+                }
+            else{
+                JOptionPane.showMessageDialog(null, "id or password is incorrect"); 
+            }
+            conn.close();
+
+        }
+        catch (SQLException e){
+            System.err.println(e);
+        }
+           
             
             
             
@@ -189,6 +218,12 @@ public class auth extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:
+    
+      
+    }//GEN-LAST:event_jButton1KeyPressed
 
     /**
      * @param args the command line arguments

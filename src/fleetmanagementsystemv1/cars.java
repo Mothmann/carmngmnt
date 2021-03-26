@@ -14,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author khattab youssef
  */
-public class members2 extends javax.swing.JFrame {
+public class cars extends javax.swing.JFrame {
 
     /**
      * Creates new form members2
      */
-    public members2() {
+    public cars() {
         initComponents();
         table_update();
     }
@@ -38,7 +38,7 @@ public class members2 extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","");
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM vehicule";
             PreparedStatement stmt = conn.prepareStatement(sql);            
             ResultSet rs = stmt.executeQuery(sql);
             ResultSetMetaData rss = rs.getMetaData();
@@ -50,25 +50,27 @@ public class members2 extends javax.swing.JFrame {
                 Vector v2 = new Vector();
                 
                 for(int a = 1; a <=c ; a++){
-                    v2.add(rs.getString("IdUtilisateur"));
-                    v2.add(rs.getString("Nom"));
-                    v2.add(rs.getString("Fonction"));
-                    v2.add(rs.getString("Statut"));
-                    v2.add(rs.getString("Type_Compte"));
-                    v2.add(rs.getString("Position"));
+                    v2.add(rs.getString("idvehi"));
+                    v2.add(rs.getString("Marque"));
+                    v2.add(rs.getString("Modele"));
+                    v2.add(rs.getString("Plaque_immatriculation"));
+                    v2.add(rs.getInt("Kilometrage"));
+                    v2.add(rs.getInt("Statut"));
+                    v2.add(rs.getInt("Reserve"));
                 }
                 Df.addRow(v2);
             }
             stmt.execute();
             
             
-            txtname.setText("");
-            txtfonction.setText("");
-            txtstatut.setText("");
-            txtrole.setText("");
-            txtpos.setText("");
+            txtmarque.setText("");
+            txtmodele.setText("");
+            txtImmatriculation.setText("");
+            txtKilo.setText("");
+            txtStatut.setText("");
+            txtReserver.setText("");
         } catch (SQLException ex) {
-            Logger.getLogger(members2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -81,23 +83,26 @@ public class members2 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtname = new javax.swing.JTextField();
+        txtmarque = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtfonction = new javax.swing.JTextField();
+        txtmodele = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtstatut = new javax.swing.JTextField();
+        txtImmatriculation = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtrole = new javax.swing.JTextField();
+        txtKilo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        txtpos = new javax.swing.JTextField();
+        txtReserver = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        txtStatut = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -117,31 +122,37 @@ public class members2 extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(63, 63, 63));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel10.setText("Nom : ");
+        jLabel10.setText("Marque :");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel11.setText("Fonction : ");
+        jLabel11.setText("Modele : ");
 
-        txtfonction.addActionListener(new java.awt.event.ActionListener() {
+        txtmodele.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfonctionActionPerformed(evt);
+                txtmodeleActionPerformed(evt);
             }
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel12.setText("Statut :");
+        jLabel12.setText("immatriculation :\t");
 
-        txtrole.addActionListener(new java.awt.event.ActionListener() {
+        txtKilo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtroleActionPerformed(evt);
+                txtKiloActionPerformed(evt);
             }
         });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel15.setText("Role :");
+        jLabel15.setText("Kilometrage :");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel16.setText("Position :");
+        jLabel16.setText("Statut :");
+
+        txtReserver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtReserverActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +180,15 @@ public class members2 extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel17.setText("Reserver :");
+
+        txtStatut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStatutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -181,13 +201,33 @@ public class members2 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel10)
-                        .addGap(474, 474, 474)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(131, 131, 131)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel4)))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel17))))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(470, 470, 470)
+                                .addComponent(jLabel3))
+                            .addComponent(txtStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,70 +235,66 @@ public class members2 extends javax.swing.JFrame {
                                     .addComponent(jButton3)
                                     .addGap(18, 18, 18)
                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel15)
-                                        .addComponent(jLabel16))
-                                    .addGap(51, 51, 51)
-                                    .addComponent(txtpos, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(39, 39, 39)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4)))
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtstatut, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                                    .addComponent(txtfonction)
-                                    .addComponent(txtrole)
-                                    .addComponent(txtname))))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtReserver, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtImmatriculation, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                                        .addComponent(txtmodele)
+                                        .addComponent(txtKilo)
+                                        .addComponent(txtmarque)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtmarque, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addGap(15, 15, 15)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(txtfonction, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtmodele, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtstatut, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtImmatriculation, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(txtrole, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKilo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(txtpos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(txtStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(17, 124, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtReserver, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 218, 163));
@@ -283,6 +319,22 @@ public class members2 extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(63, 63, 63));
+        jButton5.setText("Home");
+        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(131, 109, 255), 2));
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -290,7 +342,9 @@ public class members2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 574, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 469, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -300,7 +354,8 @@ public class members2 extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton5))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -313,11 +368,11 @@ public class members2 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nom", "Fonction", "Statut", "Role", "Position"
+                "ID", "Marque", "Modele", "Immatriculation", "Kilometrage", "Statut", "Reserver"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -376,7 +431,7 @@ public class members2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,43 +439,50 @@ public class members2 extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+        new auth().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtfonctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfonctionActionPerformed
+    private void txtmodeleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmodeleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfonctionActionPerformed
+    }//GEN-LAST:event_txtmodeleActionPerformed
 
-    private void txtroleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtroleActionPerformed
+    private void txtKiloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKiloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtroleActionPerformed
+    }//GEN-LAST:event_txtKiloActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             // TODO add your handling code here:
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","");
-            String sql = "INSERT INTO user(nom,fonction,statut,Type_Compte,Position,Password) VALUES (?,?,?,?,?,?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);            
-            stmt.setString(1, txtname.getText());
-            stmt.setString(2, txtfonction.getText());
-            stmt.setString(3, txtstatut.getText());
-            stmt.setString(4, txtrole.getText());
-            stmt.setString(5, txtpos.getText());
-            stmt.setString(6, "qwerty");
+            String sql = "INSERT INTO vehicule(Marque,Modele,Plaque_immatriculation,Kilometrage,Statut,Reserve) VALUES (?,?,?,?,?,?)";
+            
+            PreparedStatement stmt = conn.prepareStatement(sql); 
+            int kilo =Integer.parseInt(txtKilo.getText());  
+            int statut =Integer.parseInt(txtStatut.getText()); 
+            int reserver =Integer.parseInt(txtReserver.getText()); 
+            stmt.setString(1, txtmarque.getText());
+            stmt.setString(2, txtmodele.getText());
+            stmt.setString(3, txtImmatriculation.getText());
+            stmt.setInt(4, kilo);
+            stmt.setInt(5, statut);
+            stmt.setInt(6, reserver);
             stmt.execute();
-            JOptionPane.showMessageDialog(this, "USER ADDED");
+            JOptionPane.showMessageDialog(this, "Vehicule ADDED");
             table_update();
             
-            txtname.setText("");
-            txtfonction.setText("");
-            txtstatut.setText("");
-            txtrole.setText("");
-            txtpos.setText("");
+            txtmarque.setText("");
+            txtmodele.setText("");
+            txtImmatriculation.setText("");
+            txtKilo.setText("");
+            txtStatut.setText("");
+            txtReserver.setText("");
         } catch (SQLException ex) {
-            Logger.getLogger(members2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -429,11 +491,11 @@ public class members2 extends javax.swing.JFrame {
         DefaultTableModel Df = (DefaultTableModel)jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
         
-        txtname.setText(Df.getValueAt(selectedIndex, 1).toString());
-        txtfonction.setText(Df.getValueAt(selectedIndex, 2).toString());
-        txtstatut.setText(Df.getValueAt(selectedIndex, 3).toString());
-        txtrole.setText(Df.getValueAt(selectedIndex, 4).toString());
-        txtpos.setText(Df.getValueAt(selectedIndex, 5).toString());
+        txtmarque.setText(Df.getValueAt(selectedIndex, 1).toString());
+        txtmodele.setText(Df.getValueAt(selectedIndex, 2).toString());
+        txtImmatriculation.setText(Df.getValueAt(selectedIndex, 3).toString());
+        txtKilo.setText(Df.getValueAt(selectedIndex, 4).toString());
+        txtReserver.setText(Df.getValueAt(selectedIndex, 5).toString());
         
         
         
@@ -446,28 +508,31 @@ public class members2 extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             int id = Integer.parseInt(Df.getValueAt(selectedIndex, 0).toString());
-            String name = txtname.getText();
-            String fonction = txtfonction.getText();
-            String statut = txtstatut.getText();
-            String role = txtrole.getText();
-            String position = txtpos.getText();
+            String marque = txtmarque.getText();
+            String modele = txtmodele.getText();
+            String Immatriculation = txtImmatriculation.getText();
+            int kilo =Integer.parseInt(txtKilo.getText());  
+            int statut =Integer.parseInt(txtStatut.getText()); 
+            int reserver =Integer.parseInt(txtReserver.getText()); 
             
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","");
-            String sql = "UPDATE user set Nom=?,Fonction=?,Statut=?,Type_Compte=?,Position=? where IdUtilisateur=?";
-            PreparedStatement stmt = conn.prepareStatement(sql);            
+            String sql = "UPDATE vehicule set Marque=?,Modele=?,Plaque_immatriculation=?,Kilometrage=?,Statut=?, Reserve=? where idvehi=?";
             
-            stmt.setString(1, name);
-            stmt.setString(2,fonction);
-            stmt.setString(3,statut);
-            stmt.setString(4,role);
-            stmt.setString(5,position);
-            stmt.setInt(6,id);
+            
+            stmt.setString(1, marque);
+            stmt.setString(2,modele);
+            stmt.setString(3,Immatriculation);
+            stmt.setInt(4,kilo);
+            stmt.setInt(5,statut);
+            stmt.setInt(6,reserver);
+            stmt.setInt(7,id);
+            
            
             stmt.execute();
-            JOptionPane.showMessageDialog(this, "USER UPDATED");
+            JOptionPane.showMessageDialog(this, "vehicule UPDATED");
             table_update();
         } catch (SQLException ex) {
-            Logger.getLogger(members2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -490,19 +555,37 @@ public class members2 extends javax.swing.JFrame {
             
             if(dialogResult == JOptionPane.YES_OPTION){
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","");
-                String sql = "DELETE from user where IdUtilisateur=?";
+                String sql = "DELETE from vehicule where idvehi=?";
                 PreparedStatement stmt = conn.prepareStatement(sql);            
                 stmt.setInt(1, id);
                 stmt.execute();
-                JOptionPane.showMessageDialog(this, "USER DELETED");
+                JOptionPane.showMessageDialog(this, "VEHICULE DELETED");
                 table_update();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(members2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtReserverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReserverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtReserverActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        new adminpanel().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtStatutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStatutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -521,21 +604,23 @@ public class members2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(members2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cars.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(members2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cars.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(members2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cars.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(members2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cars.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new members2().setVisible(true);
+                new cars().setVisible(true);
             }
         });
     }
@@ -545,6 +630,7 @@ public class members2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -553,6 +639,7 @@ public class members2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -562,10 +649,11 @@ public class members2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtfonction;
-    private javax.swing.JTextField txtname;
-    private javax.swing.JTextField txtpos;
-    private javax.swing.JTextField txtrole;
-    private javax.swing.JTextField txtstatut;
+    private javax.swing.JTextField txtImmatriculation;
+    private javax.swing.JTextField txtKilo;
+    private javax.swing.JTextField txtReserver;
+    private javax.swing.JTextField txtStatut;
+    private javax.swing.JTextField txtmarque;
+    private javax.swing.JTextField txtmodele;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,44 +9,14 @@ import java.sql.*;
 import java.util.Scanner;
 
 
+
 public class Main{
    
     private static String USERNAME= "root";
     private static String PASSWORD= "";
     private static String CONN_STRING= "jdbc:mysql://localhost:3306/fms";
     
-    public static void main(String[] args){
-        Scanner input1 = new Scanner(System.in);  
-        System.out.println("Enter ID");
-        int id = input1.nextInt(); 
-        Scanner input2 = new Scanner(System.in);  
-        System.out.println("Enter password");
-        String pass = input2.nextLine();
-        auth(id, pass);
-    }
-    public static void auth(int IdUtilisateur,String password){
-        Connection conn = null;
-        try{
-            conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
-            Statement stmt = (Statement) conn.createStatement();
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM user where IdUtilisateur = ? and password = ?");
-            pst.setInt(1, IdUtilisateur);
-            pst.setString(2, password);
-            ResultSet rs=pst.executeQuery();
-            if(rs.next()){ 
-                System.out.println("connected");
-                role(IdUtilisateur);
-                }
-            else{
-                System.out.println("no account found");
-            }
-            conn.close();
 
-        }
-        catch (SQLException e){
-            System.err.println(e);
-        }
-    }
     public static void role(int IdUtilisateur){
         Connection conn = null;
         try{
@@ -79,36 +49,28 @@ public class Main{
        Connection conn = null;
        
         Scanner reader = new Scanner(System.in);
-        System.out.println("************************");
-        System.out.println("* Fleet Management System  1.0 *");
-        System.out.println("************************");
+
         int optionsSwitch = 0;
         // while loop for unlimited acceess 
-        boolean valid = true;
+        boolean valid = false;
         while(valid){
             
-            System.out.println("╔════ MAIN MENU ════╗");
-            System.out.println("║1 - ADD USER            ║");
-            System.out.println("║2 - LIST USER           ║");
-            System.out.println("║3 - UPDATE USER         ║");
-            System.out.println("║4 - DELETE USER         ║");
-            System.out.println("║5 - EXIT                ║");
-            System.out.println("╚═══════════════╝\n");
+        
             
             optionsSwitch = reader.nextInt();
             switch(optionsSwitch){
                 case 1 : 
                     // getting information from new User 
                     
-                    System.out.print("════ NEW USER ════ \n");
+                 
                     User newUser = new User();
-                    System.out.print("ENTER YOUR NAME : ");    
+              
                     newUser.setName(reader.next());
-                    System.out.print("ENTER YOUR FONCTION : ");    
+               
                     newUser.setFonction(reader.next());
-                    System.out.print("ENTER YOUR POSITION : "); 
+                    
                     newUser.setPosition(reader.next());
-                    System.out.print("ROLE : "); 
+                   
                     newUser.setRole(reader.next());
 
                     
