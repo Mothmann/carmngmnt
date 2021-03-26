@@ -67,6 +67,8 @@ public class cars extends javax.swing.JFrame {
             txtmodele.setText("");
             txtImmatriculation.setText("");
             txtKilo.setText("");
+            txtStatut.setText("");
+            txtReserver.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -461,20 +463,19 @@ public class cars extends javax.swing.JFrame {
             
             PreparedStatement stmt = conn.prepareStatement(sql); 
             int kilo =Integer.parseInt(txtKilo.getText());  
+            int statut = Integer.parseInt(txtStatut.getText());  
+            int reserve = Integer.parseInt(txtReserver.getText());
             stmt.setString(1, txtmarque.getText());
             stmt.setString(2, txtmodele.getText());
             stmt.setString(3, txtImmatriculation.getText());
             stmt.setInt(4, kilo);
-            stmt.setInt(5, 0);
-            stmt.setInt(6, 0);
+            stmt.setInt(5, statut);
+            stmt.setInt(6, reserve);
             stmt.execute();
             JOptionPane.showMessageDialog(this, "Vehicule ADDED");
             table_update();
             
-            txtmarque.setText("");
-            txtmodele.setText("");
-            txtImmatriculation.setText("");
-            txtKilo.setText("");
+      
         } catch (SQLException ex) {
             Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -501,22 +502,23 @@ public class cars extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             int id = Integer.parseInt(Df.getValueAt(selectedIndex, 0).toString());
-            String marque = txtmarque.getText();
-            String modele = txtmodele.getText();
-            String Immatriculation = txtImmatriculation.getText();
             int kilo =Integer.parseInt(txtKilo.getText());  
+            int statut = Integer.parseInt(txtStatut.getText());  
+            int reserve = Integer.parseInt(txtReserver.getText());
+
             
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","");
-            String sql = "UPDATE vehicule set Marque=?,Modele=?,Plaque_immatriculation=?,Kilometrage=? where idvehi=?";
+            String sql = "UPDATE vehicule set Marque=?,Modele=?,Plaque_immatriculation=?,Kilometrage=?,Statut=?,Reserve=? where idvehi=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);  
             
+            stmt.setString(1, txtmarque.getText());
+            stmt.setString(2, txtmodele.getText());
+            stmt.setString(3, txtImmatriculation.getText());
+            stmt.setInt(4, kilo);
+            stmt.setInt(5, statut);
+            stmt.setInt(6, reserve);
+            stmt.setInt(7, id);
             
-            stmt.setString(1, marque);
-            stmt.setString(2,modele);
-            stmt.setString(3,Immatriculation);
-            stmt.setInt(4,kilo);
-            stmt.setInt(5, id);
-            
-           
             stmt.execute();
             JOptionPane.showMessageDialog(this, "vehicule UPDATED");
             table_update();

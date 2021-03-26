@@ -19,7 +19,7 @@ public class auth extends javax.swing.JFrame {
     private static String USERNAME= "root";
     private static String PASSWORD= "";
     private static String CONN_STRING= "jdbc:mysql://localhost:3306/fms";
-    ArrayList<Integer> authArrayList = new ArrayList<Integer>();
+    public static ArrayList<Integer> authArrayList = new ArrayList<Integer>(0);
 
     public ArrayList<Integer> getAuthArrayList() {
         return authArrayList;
@@ -199,10 +199,10 @@ public class auth extends javax.swing.JFrame {
                        new adminpanel().setVisible(true);
                 }
                  if (TypeCompte.equals("employee")){
-                     authArrayList.clear();
-                     authArrayList.add(id);
-                       this.setVisible(false);
-                       new user_gui().setVisible(true);
+                    authArrayList.clear();
+                    authArrayList.add(id);
+                    this.setVisible(false);
+                    new user_gui().setVisible(true);
 
                 }
              
