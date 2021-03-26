@@ -296,7 +296,7 @@ public class users extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(63, 63, 63));
-        jLabel2.setText("AdminPortel");
+        jLabel2.setText("AdminPortal");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -457,10 +457,11 @@ public class users extends javax.swing.JFrame {
             String sql = "INSERT INTO user(nom,fonction,statut,Type_Compte,Position,Password) VALUES (?,?,?,?,?,?)";
             char[] pass = jPasswordField1.getPassword();
             String password = new String(pass);
+            int statut =Integer.parseInt(txtstatut.getText());  
             PreparedStatement stmt = conn.prepareStatement(sql);            
             stmt.setString(1, txtname.getText());
             stmt.setString(2, txtfonction.getText());
-            stmt.setString(3, txtstatut.getText());
+            stmt.setInt(3, statut);
             stmt.setString(4, txtrole.getText());
             stmt.setString(5, txtpos.getText());
             stmt.setString(6, password);
@@ -502,7 +503,7 @@ public class users extends javax.swing.JFrame {
             int id = Integer.parseInt(Df.getValueAt(selectedIndex, 0).toString());
             String name = txtname.getText();
             String fonction = txtfonction.getText();
-            String statut = txtstatut.getText();
+            int statut =Integer.parseInt(txtstatut.getText());  
             String role = txtrole.getText();
             String position = txtpos.getText();
             
@@ -514,7 +515,7 @@ public class users extends javax.swing.JFrame {
             
             stmt.setString(1, name);
             stmt.setString(2,fonction);
-            stmt.setString(3,statut);
+            stmt.setInt(3,statut);
             stmt.setString(4,role);
             stmt.setString(5,position);
             stmt.setString(6,password);

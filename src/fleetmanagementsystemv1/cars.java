@@ -67,8 +67,6 @@ public class cars extends javax.swing.JFrame {
             txtmodele.setText("");
             txtImmatriculation.setText("");
             txtKilo.setText("");
-            txtStatut.setText("");
-            txtReserver.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -399,7 +397,7 @@ public class cars extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -463,14 +461,12 @@ public class cars extends javax.swing.JFrame {
             
             PreparedStatement stmt = conn.prepareStatement(sql); 
             int kilo =Integer.parseInt(txtKilo.getText());  
-            int statut =Integer.parseInt(txtStatut.getText()); 
-            int reserver =Integer.parseInt(txtReserver.getText()); 
             stmt.setString(1, txtmarque.getText());
             stmt.setString(2, txtmodele.getText());
             stmt.setString(3, txtImmatriculation.getText());
             stmt.setInt(4, kilo);
-            stmt.setInt(5, statut);
-            stmt.setInt(6, reserver);
+            stmt.setInt(5, 0);
+            stmt.setInt(6, 0);
             stmt.execute();
             JOptionPane.showMessageDialog(this, "Vehicule ADDED");
             table_update();
@@ -479,8 +475,6 @@ public class cars extends javax.swing.JFrame {
             txtmodele.setText("");
             txtImmatriculation.setText("");
             txtKilo.setText("");
-            txtStatut.setText("");
-            txtReserver.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(cars.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -495,7 +489,6 @@ public class cars extends javax.swing.JFrame {
         txtmodele.setText(Df.getValueAt(selectedIndex, 2).toString());
         txtImmatriculation.setText(Df.getValueAt(selectedIndex, 3).toString());
         txtKilo.setText(Df.getValueAt(selectedIndex, 4).toString());
-        txtReserver.setText(Df.getValueAt(selectedIndex, 5).toString());
         
         
         
@@ -512,20 +505,16 @@ public class cars extends javax.swing.JFrame {
             String modele = txtmodele.getText();
             String Immatriculation = txtImmatriculation.getText();
             int kilo =Integer.parseInt(txtKilo.getText());  
-            int statut =Integer.parseInt(txtStatut.getText()); 
-            int reserver =Integer.parseInt(txtReserver.getText()); 
             
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","");
-            String sql = "UPDATE vehicule set Marque=?,Modele=?,Plaque_immatriculation=?,Kilometrage=?,Statut=?, Reserve=? where idvehi=?";
+            String sql = "UPDATE vehicule set Marque=?,Modele=?,Plaque_immatriculation=?,Kilometrage=? where idvehi=?";
             
             
             stmt.setString(1, marque);
             stmt.setString(2,modele);
             stmt.setString(3,Immatriculation);
             stmt.setInt(4,kilo);
-            stmt.setInt(5,statut);
-            stmt.setInt(6,reserver);
-            stmt.setInt(7,id);
+            stmt.setInt(5, id);
             
            
             stmt.execute();
@@ -569,10 +558,6 @@ public class cars extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void txtReserverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReserverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReserverActionPerformed
-
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         new adminpanel().setVisible(true);
@@ -582,6 +567,10 @@ public class cars extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtReserverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReserverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtReserverActionPerformed
 
     private void txtStatutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatutActionPerformed
         // TODO add your handling code here:

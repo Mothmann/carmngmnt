@@ -7,8 +7,8 @@ package fleetmanagementsystemv1;
 
 import javax.swing.JOptionPane;
 import java.sql.*;
-import fleetmanagementsystemv1.Main;
-import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -16,12 +16,15 @@ import java.awt.event.KeyEvent;
  */
 public class auth extends javax.swing.JFrame {
 
-    /**
-     * Creates new form auth
-     */
     private static String USERNAME= "root";
     private static String PASSWORD= "";
     private static String CONN_STRING= "jdbc:mysql://localhost:3306/fms";
+    ArrayList<Integer> authArrayList = new ArrayList<Integer>();
+
+    public ArrayList<Integer> getAuthArrayList() {
+        return authArrayList;
+    }
+  
     public auth() {
         initComponents();
     }
@@ -190,8 +193,19 @@ public class auth extends javax.swing.JFrame {
             pst.setString(2, password);
             ResultSet rs=pst.executeQuery();
             if(rs.next()){ 
-                this.setVisible(false);
-                new adminpanel().setVisible(true);
+                  String TypeCompte = rs.getString ("Type_Compte");    
+                if (TypeCompte.equals("admin")){
+                       this.setVisible(false);
+                       new adminpanel().setVisible(true);
+                }
+                 if (TypeCompte.equals("employee")){
+                     authArrayList.clear();
+                     authArrayList.add(id);
+                       this.setVisible(false);
+                       new user_gui().setVisible(true);
+
+                }
+             
                 }
             else{
                 JOptionPane.showMessageDialog(null, "id or password is incorrect"); 
@@ -202,14 +216,11 @@ public class auth extends javax.swing.JFrame {
         catch (SQLException e){
             System.err.println(e);
         }
-           
-            
-            
-            
-            
+
         }
         
     }//GEN-LAST:event_jButton1MouseClicked
+
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
