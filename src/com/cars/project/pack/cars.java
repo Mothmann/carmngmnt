@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fleetmanagementsystemv1;
+package com.cars.project.pack;
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -301,7 +301,7 @@ public class cars extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(63, 63, 63));
-        jLabel2.setText("AdminPortel");
+        jLabel2.setText("AdminPortal");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

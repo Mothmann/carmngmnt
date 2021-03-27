@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fleetmanagementsystemv1;
+package com.cars.project.pack;
 import java.sql.*;
 // import java.util.ArrayList;
 import java.util.Scanner;
